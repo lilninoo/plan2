@@ -1,9 +1,9 @@
 <?php
 /**
- * Plugin Name: HyperPlanning-v2
+ * Plugin Name: HyperPlanning
  * Plugin URI: https://hyperplanning.com
  * Description: Gestion centralisée des calendriers de formateurs avec synchronisation multi-sources
- * Version: 2.0.0
+ * Version: 1.0.0
  * Author: HyperPlanning Team
  * License: GPL v2 or later
  * Text Domain: hyperplanning
@@ -42,6 +42,7 @@ require_once HYPERPLANNING_PLUGIN_DIR . 'vendor/autoload.php';
 class HyperPlanning {
     
     private static $instance = null;
+    private $loader;
     
     public static function getInstance() {
         if (null === self::$instance) {
@@ -63,7 +64,7 @@ class HyperPlanning {
         require_once HYPERPLANNING_PLUGIN_DIR . 'includes/class-hp-constants.php';
         require_once HYPERPLANNING_PLUGIN_DIR . 'includes/helpers.php';
         
-        // Models
+        // Models - Un fichier par classe
         require_once HYPERPLANNING_PLUGIN_DIR . 'includes/models/class-hp-trainer.php';
         require_once HYPERPLANNING_PLUGIN_DIR . 'includes/models/class-hp-calendar.php';
         require_once HYPERPLANNING_PLUGIN_DIR . 'includes/models/class-hp-event.php';
@@ -74,24 +75,22 @@ class HyperPlanning {
             require_once HYPERPLANNING_PLUGIN_DIR . 'admin/class-hp-settings.php';
         }
         
-        // Public
-        if (!is_admin()) {
-            require_once HYPERPLANNING_PLUGIN_DIR . 'public/class-hp-public.php';
-            require_once HYPERPLANNING_PLUGIN_DIR . 'public/class-hp-shortcodes.php';
-        }
+        // Public - Toujours charger pour les AJAX et API REST
+        require_once HYPERPLANNING_PLUGIN_DIR . 'public/class-hp-public.php';
+        require_once HYPERPLANNING_PLUGIN_DIR . 'public/class-hp-shortcodes.php';
         
-        // Sync
+        // Sync - Un fichier par classe
         require_once HYPERPLANNING_PLUGIN_DIR . 'includes/sync/class-hp-sync-manager.php';
         require_once HYPERPLANNING_PLUGIN_DIR . 'includes/sync/class-hp-google-sync.php';
-        //require_once HYPERPLANNING_PLUGIN_DIR . 'includes/sync/class-hp-ical-sync.php';
+        require_once HYPERPLANNING_PLUGIN_DIR . 'includes/sync/class-hp-ical-sync.php';
         
         // API
         require_once HYPERPLANNING_PLUGIN_DIR . 'includes/api/class-hp-rest-controller.php';
+        
+        $this->loader = new HP_Loader();
     }
     
     private function defineHooks() {
-        $loader = new HP_Loader();
-        
         // Activation/Deactivation hooks
         register_activation_hook(__FILE__, array('HP_Activator', 'activate'));
         register_deactivation_hook(__FILE__, array('HP_Deactivator', 'deactivate'));
@@ -99,48 +98,51 @@ class HyperPlanning {
         // Admin hooks
         if (is_admin()) {
             $admin = new HP_Admin();
-            $loader->addAction('admin_menu', $admin, 'addAdminMenu');
-            $loader->addAction('admin_enqueue_scripts', $admin, 'enqueueStyles');
-            $loader->addAction('admin_enqueue_scripts', $admin, 'enqueueScripts');
+            $this->loader->addAction('admin_menu', $admin, 'addAdminMenu');
+            $this->loader->addAction('admin_enqueue_scripts', $admin, 'enqueueStyles');
+            $this->loader->addAction('admin_enqueue_scripts', $admin, 'enqueueScripts');
             
-            // AJAX handlers pour l'admin
-            $loader->addAction('wp_ajax_hp_get_events', $admin, 'ajaxGetEvents');
-            $loader->addAction('wp_ajax_hp_save_event', $admin, 'ajaxSaveEvent');
-            $loader->addAction('wp_ajax_hp_delete_event', $admin, 'ajaxDeleteEvent');
+            // Settings actions
+            $settings = new HP_Settings();
+            $this->loader->addAction('admin_init', $settings, 'handleActions');
         }
         
         // Public hooks
-        if (!is_admin()) {
-            $public = new HP_Public();
-            $loader->addAction('wp_enqueue_scripts', $public, 'enqueueStyles');
-            $loader->addAction('wp_enqueue_scripts', $public, 'enqueueScripts');
-            
-            // Shortcodes
-            $shortcodes = new HP_Shortcodes();
-            $loader->addAction('init', $shortcodes, 'registerShortcodes');
-            
-            // Formulaire de soumission
-            $loader->addAction('init', $public, 'handleEventSubmission');
-        }
+        $public = new HP_Public();
+        $this->loader->addAction('wp_enqueue_scripts', $public, 'enqueueStyles');
+        $this->loader->addAction('wp_enqueue_scripts', $public, 'enqueueScripts');
+        $this->loader->addAction('init', $public, 'handleEventSubmission');
+        $this->loader->addAction('init', $public, 'handleCustomRequests');
+        $this->loader->addFilter('body_class', $public, 'addBodyClasses');
+        
+        // AJAX handlers pour le public
+        $this->loader->addAction('wp_ajax_hp_get_public_events', $public, 'ajaxGetPublicEvents');
+        $this->loader->addAction('wp_ajax_nopriv_hp_get_public_events', $public, 'ajaxGetPublicEvents');
+        $this->loader->addAction('wp_ajax_hp_get_event_details', $public, 'ajaxGetEventDetails');
+        $this->loader->addAction('wp_ajax_nopriv_hp_get_event_details', $public, 'ajaxGetEventDetails');
+        
+        // Shortcodes
+        $shortcodes = new HP_Shortcodes();
+        $this->loader->addAction('init', $shortcodes, 'registerShortcodes');
         
         // API REST
         $api = new HP_REST_Controller();
-        $loader->addAction('rest_api_init', $api, 'registerRoutes');
+        $this->loader->addAction('rest_api_init', $api, 'registerRoutes');
         
         // Synchronisation
         $syncManager = new HP_Sync_Manager();
-        $loader->addAction('hp_sync_cron', $syncManager, 'runSync');
+        $this->loader->addAction('hp_sync_cron', $syncManager, 'runSync');
         
         // Cron
-        $loader->addAction('init', $this, 'scheduleCron');
+        $this->loader->addAction('init', $this, 'scheduleCron');
         
         // i18n
-        $loader->addAction('plugins_loaded', $this, 'loadTextdomain');
+        $this->loader->addAction('plugins_loaded', $this, 'loadTextdomain');
         
         // Admin notices
-        $loader->addAction('admin_notices', $this, 'adminNotices');
+        $this->loader->addAction('admin_notices', $this, 'adminNotices');
         
-        $loader->run();
+        $this->loader->run();
     }
     
     public function scheduleCron() {
@@ -171,17 +173,6 @@ class HyperPlanning {
             <?php
         }
         
-        // Vérifier si les tables sont créées
-        global $wpdb;
-        $table_exists = $wpdb->get_var("SHOW TABLES LIKE '{$wpdb->prefix}hp_trainers'");
-        if (!$table_exists) {
-            ?>
-            <div class="notice notice-warning">
-                <p><?php _e('Les tables HyperPlanning ne sont pas créées. Veuillez désactiver et réactiver le plugin.', 'hyperplanning'); ?></p>
-            </div>
-            <?php
-        }
-        
         // Message après activation
         if (get_transient('hp_activation_notice')) {
             ?>
@@ -200,12 +191,6 @@ class HyperPlanning {
 
 // Initialisation du plugin
 add_action('plugins_loaded', function() {
-    // Vérifier les dépendances
-    if (!function_exists('wp_roles')) {
-        return;
-    }
-    
-    // Initialiser le plugin
     HyperPlanning::getInstance();
 });
 
