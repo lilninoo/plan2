@@ -1,0 +1,493 @@
+/* assets/css/public-extended.css - Styles additionnels pour le frontend */
+
+/* Grilles et mise en page */
+.hp-trainers-grid {
+    display: grid;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+@media (max-width: 768px) {
+    .hp-trainers-grid {
+        grid-template-columns: 1fr !important;
+    }
+}
+
+/* Formulaires */
+.hp-form {
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+.hp-form-group {
+    margin-bottom: 20px;
+}
+
+.hp-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: #333;
+}
+
+.hp-form-group input[type="text"],
+.hp-form-group input[type="email"],
+.hp-form-group input[type="tel"],
+.hp-form-group input[type="url"],
+.hp-form-group input[type="datetime-local"],
+.hp-form-group select,
+.hp-form-group textarea {
+    width: 100%;
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 16px;
+    transition: border-color 0.3s;
+}
+
+.hp-form-group input:focus,
+.hp-form-group select:focus,
+.hp-form-group textarea:focus {
+    outline: none;
+    border-color: #0073aa;
+    box-shadow: 0 0 0 2px rgba(0, 115, 170, 0.1);
+}
+
+.hp-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+@media (max-width: 576px) {
+    .hp-form-row {
+        grid-template-columns: 1fr;
+    }
+}
+
+.hp-form-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.hp-submit-button {
+    background: #0073aa;
+    color: white;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background 0.3s;
+}
+
+.hp-submit-button:hover {
+    background: #005a87;
+}
+
+.hp-submit-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+}
+
+/* Messages et notifications */
+.hp-form-message {
+    padding: 15px;
+    border-radius: 4px;
+    margin: 20px 0;
+}
+
+.hp-form-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.hp-form-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+/* Calendrier de disponibilité */
+.hp-availability-calendar {
+    margin: 20px 0;
+}
+
+.hp-availability-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.hp-availability-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid #ddd;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.3s;
+    position: relative;
+}
+
+.hp-availability-day.available {
+    background: #d4f1d4;
+    border-color: #5cb85c;
+}
+
+.hp-availability-day.busy {
+    background: #f8d7da;
+    border-color: #d9534f;
+}
+
+.hp-availability-day.past {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hp-availability-day:hover:not(.past) {
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.hp-day-number {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+.hp-day-month {
+    font-size: 12px;
+    color: #666;
+    text-transform: uppercase;
+}
+
+.hp-day-status {
+    position: absolute;
+    bottom: 5px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.hp-availability-legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid #eee;
+}
+
+.hp-availability-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hp-availability-legend span::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    display: inline-block;
+}
+
+.hp-availability-legend .available::before {
+    background: #d4f1d4;
+    border: 2px solid #5cb85c;
+}
+
+.hp-availability-legend .busy::before {
+    background: #f8d7da;
+    border: 2px solid #d9534f;
+}
+
+/* Événements à venir */
+.hp-upcoming-events {
+    margin: 20px 0;
+}
+
+.hp-event-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    transition: all 0.3s;
+}
+
+.hp-event-item:hover {
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transform: translateY(-2px);
+}
+
+.hp-event-date {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: #0073aa;
+    color: white;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.hp-event-day {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.hp-event-month {
+    font-size: 12px;
+    text-transform: uppercase;
+}
+
+.hp-event-details {
+    flex-grow: 1;
+}
+
+.hp-event-details h4 {
+    margin: 0 0 10px;
+    color: #333;
+}
+
+.hp-event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 14px;
+    color: #666;
+}
+
+.hp-event-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.hp-event-meta span::before {
+    content: '';
+    width: 4px;
+    height: 4px;
+    background: #999;
+    border-radius: 50%;
+}
+
+.hp-event-meta span:first-child::before {
+    display: none;
+}
+
+/* Filtres publics */
+.hp-calendar-public-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+}
+
+.hp-calendar-public-filters select {
+    padding: 8px 12px;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    background: white;
+    font-size: 14px;
+    cursor: pointer;
+}
+
+/* Légende du calendrier */
+.hp-calendar-legend {
+    margin-top: 20px;
+    padding: 15px;
+    background: #f9f9f9;
+    border-radius: 4px;
+}
+
+.hp-calendar-legend h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: #666;
+}
+
+.hp-legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.hp-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hp-legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: 4px;
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.hp-legend-label {
+    font-size: 14px;
+    color: #333;
+}
+
+/* Accessibilité */
+.hp-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visible pour l'accessibilité */
+.hp-calendar-container a:focus-visible,
+.hp-calendar-container button:focus-visible,
+.hp-form input:focus-visible,
+.hp-form select:focus-visible,
+.hp-form textarea:focus-visible,
+.hp-form button:focus-visible {
+    outline: 3px solid #0073aa;
+    outline-offset: 2px;
+}
+
+/* Mode sombre (optionnel) */
+@media (prefers-color-scheme: dark) {
+    .hp-public-calendar,
+    .hp-trainer-card,
+    .hp-event-item {
+        background: #1e1e1e;
+        color: #e0e0e0;
+        border-color: #333;
+    }
+    
+    .hp-form-group label,
+    .hp-event-details h4,
+    .hp-trainer-info h3 {
+        color: #e0e0e0;
+    }
+    
+    .hp-form-group input,
+    .hp-form-group select,
+    .hp-form-group textarea {
+        background: #2a2a2a;
+        border-color: #444;
+        color: #e0e0e0;
+    }
+    
+    .hp-availability-day {
+        border-color: #444;
+    }
+    
+    .hp-availability-day.available {
+        background: #1a4d1a;
+        border-color: #2d6e2d;
+    }
+    
+    .hp-availability-day.busy {
+        background: #4d1a1a;
+        border-color: #6e2d2d;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hp-event-item,
+.hp-trainer-card {
+    animation: fadeIn 0.3s ease-out;
+}
+
+/* Print styles */
+@media print {
+    .hp-calendar-filters,
+    .hp-calendar-public-filters,
+    .hp-form-actions,
+    .hp-trainer-calendar-link {
+        display: none !important;
+    }
+    
+    .hp-calendar-container {
+        border: none !important;
+        box-shadow: none !important;
+    }
+    
+    .hp-event-item {
+        page-break-inside: avoid;
+    }
+}
+
+/* Structure des dossiers du plugin (pour référence) :
+
+hyperplanning/
+├── assets/
+│   ├── css/
+│   │   ├── admin.css
+│   │   ├── public.css
+│   │   └── public-extended.css
+│   ├── js/
+│   │   ├── admin.js
+│   │   └── public.js
+│   └── images/
+│       └── (logos, icônes)
+├── admin/
+│   ├── class-hp-admin.php
+│   ├── class-hp-settings.php
+│   └── views/
+│       └── (templates admin)
+├── includes/
+│   ├── class-hp-loader.php
+│   ├── class-hp-activator.php
+│   ├── class-hp-deactivator.php
+│   ├── models/
+│   │   ├── class-hp-trainer.php
+│   │   ├── class-hp-calendar.php
+│   │   └── class-hp-event.php
+│   ├── sync/
+│   │   ├── class-hp-sync-manager.php
+│   │   ├── class-hp-google-sync.php
+│   │   └── class-hp-ical-sync.php
+│   └── api/
+│       └── class-hp-rest-controller.php
+├── public/
+│   ├── class-hp-public.php
+│   ├── class-hp-shortcodes.php
+│   └── views/
+│       └── (templates publics)
+├── languages/
+│   ├── hyperplanning-fr_FR.po
+│   ├── hyperplanning-fr_FR.mo
+│   └── hyperplanning.pot
+├── vendor/
+│   └── (dépendances Composer)
+├── hyperplanning.php (fichier principal)
+├── composer.json
+├── README.md
+└── LICENSE
+
+*/

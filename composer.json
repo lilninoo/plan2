@@ -1,0 +1,36 @@
+{
+  "name": "hyperplanning/wordpress-plugin",
+  "description": "Gestion centralisée des calendriers de formateurs avec synchronisation multi-sources",
+  "type": "wordpress-plugin",
+  "license": "GPL-2.0-or-later",
+  "authors": [
+    {
+      "name": "HyperPlanning Team",
+      "email": "contact@hyperplanning.com"
+    }
+  ],
+  "minimum-stability": "stable",
+  "require": {
+    "php": ">=7.4",
+    "google/apiclient": "^2.12",
+    "sabre/vobject": "^4.5"
+  },
+  "autoload": {
+    "psr-4": {
+      "HyperPlanning\\": "includes/"
+    }
+  },
+  "config": {
+    "optimize-autoloader": true,
+    "preferred-install": "dist",
+    "sort-packages": true
+  },
+  "scripts": {
+    "post-install-cmd": [
+      "@composer dump-autoload -o"
+    ],
+    "post-update-cmd": [
+      "@composer dump-autoload -o"
+    ]
+  }
+}

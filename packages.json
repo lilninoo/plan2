@@ -1,0 +1,44 @@
+{
+  "name": "hyperplanning",
+  "version": "1.0.0",
+  "description": "Gestion centralisée des calendriers de formateurs pour WordPress",
+  "main": "index.js",
+  "scripts": {
+    "build": "webpack --mode production",
+    "dev": "webpack --mode development --watch",
+    "test": "jest",
+    "lint": "eslint assets/js/*.js",
+    "sass": "sass assets/scss:assets/css --style compressed",
+    "sass:watch": "sass assets/scss:assets/css --watch",
+    "pot": "wp i18n make-pot . languages/hyperplanning.pot --domain=hyperplanning",
+    "zip": "zip -r hyperplanning.zip . -x '*.git*' 'node_modules/*' 'tests/*' '*.log' '.DS_Store' 'package-lock.json' 'composer.lock' '.env' '*.map'"
+  },
+  "keywords": [
+    "wordpress",
+    "plugin",
+    "calendar",
+    "scheduler",
+    "events"
+  ],
+  "author": "HyperPlanning Team",
+  "license": "GPL-2.0-or-later",
+  "devDependencies": {
+    "@wordpress/scripts": "^26.0.0",
+    "eslint": "^8.0.0",
+    "jest": "^29.0.0",
+    "sass": "^1.60.0",
+    "webpack": "^5.0.0",
+    "webpack-cli": "^5.0.0"
+  },
+  "dependencies": {
+    "fullcalendar": "^6.1.8"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hyperplanning/wordpress-plugin.git"
+  },
+  "bugs": {
+    "url": "https://github.com/hyperplanning/wordpress-plugin/issues"
+  },
+  "homepage": "https://hyperplanning.com"
+}

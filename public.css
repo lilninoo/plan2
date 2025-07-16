@@ -1,0 +1,865 @@
+/* 
+ * HyperPlanning - Styles Publics
+ * Version: 1.0.0
+ */
+
+/* Variables CSS */
+:root {
+    --hp-primary: #0073aa;
+    --hp-primary-dark: #005a87;
+    --hp-primary-light: #e5f3fb;
+    --hp-secondary: #23282d;
+    --hp-success: #46b450;
+    --hp-warning: #ffb900;
+    --hp-danger: #dc3232;
+    --hp-info: #00a0d2;
+    --hp-light: #f1f1f1;
+    --hp-lighter: #f8f9fa;
+    --hp-border: #ddd;
+    --hp-text: #32373c;
+    --hp-text-light: #666;
+    --hp-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    --hp-shadow-hover: 0 4px 8px rgba(0,0,0,0.15);
+    --hp-radius: 4px;
+    --hp-transition: all 0.3s ease;
+}
+
+/* Reset et base */
+.hp-calendar-wrapper *,
+.hp-trainer-calendar-wrapper *,
+.hp-trainers-grid *,
+.hp-upcoming-events *,
+.hp-availability-calendar *,
+.hp-event-submission-form * {
+    box-sizing: border-box;
+}
+
+/* Calendrier public */
+.hp-calendar-wrapper,
+.hp-trainer-calendar-wrapper {
+    margin: 20px 0;
+}
+
+.hp-public-calendar {
+    background: #fff;
+    border: 1px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    padding: 20px;
+    box-shadow: var(--hp-shadow);
+}
+
+/* Filtres du calendrier */
+.hp-calendar-public-filters {
+    display: flex;
+    gap: 15px;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    align-items: center;
+}
+
+.hp-filter-label {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hp-filter-label span {
+    font-weight: 600;
+    color: var(--hp-text);
+    font-size: 14px;
+}
+
+.hp-calendar-public-filters select {
+    padding: 8px 12px;
+    border: 1px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    background: #fff;
+    font-size: 14px;
+    cursor: pointer;
+    transition: var(--hp-transition);
+    min-width: 150px;
+}
+
+.hp-calendar-public-filters select:hover {
+    border-color: var(--hp-primary);
+}
+
+.hp-calendar-public-filters select:focus {
+    outline: none;
+    border-color: var(--hp-primary);
+    box-shadow: 0 0 0 2px rgba(0, 115, 170, 0.1);
+}
+
+/* Légende du calendrier */
+.hp-calendar-legend {
+    margin-top: 20px;
+    padding: 15px;
+    background: var(--hp-lighter);
+    border-radius: var(--hp-radius);
+    border: 1px solid var(--hp-border);
+}
+
+.hp-calendar-legend h4 {
+    margin: 0 0 10px;
+    font-size: 14px;
+    text-transform: uppercase;
+    color: var(--hp-text-light);
+    font-weight: 600;
+}
+
+.hp-legend-items {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.hp-legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.hp-legend-color {
+    width: 20px;
+    height: 20px;
+    border-radius: var(--hp-radius);
+    border: 1px solid rgba(0,0,0,0.1);
+}
+
+.hp-legend-label {
+    font-size: 14px;
+    color: var(--hp-text);
+}
+
+.hp-legend-separator {
+    width: 100%;
+    height: 1px;
+    background: var(--hp-border);
+    margin: 10px 0;
+}
+
+/* Carte formateur */
+.hp-trainer-card {
+    background: #fff;
+    border: 1px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    padding: 20px;
+    box-shadow: var(--hp-shadow);
+    transition: var(--hp-transition);
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+}
+
+.hp-trainer-card:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--hp-shadow-hover);
+}
+
+.hp-trainer-avatar {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background: var(--hp-primary);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+    font-weight: 600;
+    flex-shrink: 0;
+}
+
+.hp-trainer-avatar-large {
+    width: 200px;
+    height: 200px;
+    font-size: 72px;
+}
+
+.hp-trainer-info {
+    flex-grow: 1;
+}
+
+.hp-trainer-info h3 {
+    margin: 0 0 10px;
+    color: var(--hp-text);
+    font-size: 20px;
+}
+
+.hp-trainer-meta {
+    margin-bottom: 10px;
+}
+
+.hp-trainer-contact {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-bottom: 5px;
+    color: var(--hp-text-light);
+    font-size: 14px;
+}
+
+.hp-trainer-contact .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+.hp-trainer-contact a {
+    color: var(--hp-primary);
+    text-decoration: none;
+    transition: var(--hp-transition);
+}
+
+.hp-trainer-contact a:hover {
+    color: var(--hp-primary-dark);
+    text-decoration: underline;
+}
+
+/* Spécialités */
+.hp-trainer-specialties {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 10px;
+}
+
+.hp-specialty-tag {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--hp-primary-light);
+    color: var(--hp-primary);
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+}
+
+/* Grille des formateurs */
+.hp-trainers-grid {
+    display: grid;
+    gap: 20px;
+    margin: 20px 0;
+}
+
+.hp-trainers-grid .hp-trainer-card {
+    flex-direction: column;
+    text-align: center;
+}
+
+.hp-trainers-grid .hp-trainer-avatar {
+    margin: 0 auto 15px;
+}
+
+.hp-trainer-calendar-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    margin-top: 15px;
+    padding: 8px 16px;
+    background: var(--hp-primary);
+    color: #fff;
+    text-decoration: none;
+    border-radius: var(--hp-radius);
+    font-size: 14px;
+    transition: var(--hp-transition);
+}
+
+.hp-trainer-calendar-link:hover {
+    background: var(--hp-primary-dark);
+    color: #fff;
+    transform: translateY(-1px);
+}
+
+.hp-trainer-calendar-link .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+}
+
+/* Badge de disponibilité */
+.hp-trainer-availability-badge {
+    margin-top: 10px;
+}
+
+.hp-badge {
+    display: inline-block;
+    padding: 4px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.hp-badge-available {
+    background: #d4f4dd;
+    color: #2e7d32;
+}
+
+.hp-badge-soon {
+    background: #fff3cd;
+    color: #856404;
+}
+
+.hp-badge-busy {
+    background: #f8d7da;
+    color: #721c24;
+}
+
+.hp-badge-unavailable {
+    background: #e9ecef;
+    color: #6c757d;
+}
+
+/* Événements à venir */
+.hp-upcoming-events {
+    margin: 20px 0;
+}
+
+.hp-event-item {
+    display: flex;
+    gap: 20px;
+    padding: 20px;
+    border: 1px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    margin-bottom: 15px;
+    transition: var(--hp-transition);
+    background: #fff;
+}
+
+.hp-event-item:hover {
+    box-shadow: var(--hp-shadow-hover);
+    transform: translateY(-2px);
+}
+
+.hp-event-date {
+    flex-shrink: 0;
+    width: 60px;
+    height: 60px;
+    background: var(--hp-primary);
+    color: #fff;
+    border-radius: var(--hp-radius);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}
+
+.hp-event-day {
+    font-size: 24px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.hp-event-month {
+    font-size: 12px;
+    text-transform: uppercase;
+    margin-top: 2px;
+}
+
+.hp-event-details {
+    flex-grow: 1;
+}
+
+.hp-event-details h4 {
+    margin: 0 0 10px;
+    color: var(--hp-text);
+    font-size: 18px;
+}
+
+.hp-event-description {
+    color: var(--hp-text-light);
+    margin-bottom: 10px;
+    line-height: 1.5;
+}
+
+.hp-event-meta {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px;
+    font-size: 14px;
+    color: var(--hp-text-light);
+}
+
+.hp-event-meta span {
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.hp-event-meta .dashicons {
+    width: 16px;
+    height: 16px;
+    font-size: 16px;
+    color: var(--hp-text-light);
+}
+
+/* Calendrier de disponibilité */
+.hp-availability-calendar {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    box-shadow: var(--hp-shadow);
+}
+
+.hp-availability-calendar h3 {
+    margin: 0 0 20px;
+    color: var(--hp-text);
+}
+
+.hp-availability-grid {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 10px;
+    margin: 20px 0;
+}
+
+.hp-availability-day {
+    aspect-ratio: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    cursor: pointer;
+    transition: var(--hp-transition);
+    position: relative;
+    background: #fff;
+}
+
+.hp-availability-day.available {
+    background: #d4f1d4;
+    border-color: #5cb85c;
+}
+
+.hp-availability-day.available:hover {
+    background: #b8e5b8;
+    transform: scale(1.05);
+}
+
+.hp-availability-day.busy {
+    background: #f8d7da;
+    border-color: #d9534f;
+}
+
+.hp-availability-day.past {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.hp-availability-day.weekend {
+    background: var(--hp-lighter);
+}
+
+.hp-day-number {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--hp-text);
+}
+
+.hp-day-month {
+    font-size: 12px;
+    color: var(--hp-text-light);
+    text-transform: uppercase;
+}
+
+.hp-day-status {
+    position: absolute;
+    bottom: 5px;
+    font-size: 10px;
+    font-weight: bold;
+    text-transform: uppercase;
+}
+
+.hp-availability-legend {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    margin-top: 20px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hp-border);
+}
+
+.hp-availability-legend span {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+.hp-availability-legend span::before {
+    content: '';
+    width: 20px;
+    height: 20px;
+    border-radius: var(--hp-radius);
+    display: inline-block;
+    border: 2px solid;
+}
+
+.hp-availability-legend .available::before {
+    background: #d4f1d4;
+    border-color: #5cb85c;
+}
+
+.hp-availability-legend .busy::before {
+    background: #f8d7da;
+    border-color: #d9534f;
+}
+
+.hp-availability-legend .past::before {
+    background: #e9ecef;
+    border-color: #6c757d;
+    opacity: 0.5;
+}
+
+/* Formulaire de soumission */
+.hp-event-submission-form {
+    max-width: 600px;
+    margin: 20px 0;
+}
+
+.hp-form {
+    background: #fff;
+    border: 1px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    padding: 30px;
+    box-shadow: var(--hp-shadow);
+}
+
+.hp-form-group {
+    margin-bottom: 20px;
+}
+
+.hp-form-group label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: 600;
+    color: var(--hp-text);
+}
+
+.hp-form-group label .required {
+    color: var(--hp-danger);
+}
+
+.hp-form-group input[type="text"],
+.hp-form-group input[type="email"],
+.hp-form-group input[type="tel"],
+.hp-form-group input[type="url"],
+.hp-form-group input[type="datetime-local"],
+.hp-form-group input[type="date"],
+.hp-form-group select,
+.hp-form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    font-size: 16px;
+    transition: var(--hp-transition);
+    background: #fff;
+}
+
+.hp-form-group input:focus,
+.hp-form-group select:focus,
+.hp-form-group textarea:focus {
+    outline: none;
+    border-color: var(--hp-primary);
+    box-shadow: 0 0 0 2px rgba(0, 115, 170, 0.1);
+}
+
+.hp-form-row {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+}
+
+.hp-checkbox-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.hp-checkbox-label input[type="checkbox"] {
+    width: auto;
+}
+
+.hp-form-actions {
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--hp-border);
+}
+
+.hp-submit-button,
+.hp-button {
+    display: inline-block;
+    background: var(--hp-primary);
+    color: #fff;
+    padding: 12px 24px;
+    border: none;
+    border-radius: var(--hp-radius);
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--hp-transition);
+    text-decoration: none;
+}
+
+.hp-submit-button:hover,
+.hp-button:hover {
+    background: var(--hp-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+}
+
+.hp-submit-button:disabled {
+    background: #ccc;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.hp-button-primary {
+    background: var(--hp-primary);
+    color: #fff;
+}
+
+.hp-button-secondary {
+    background: var(--hp-light);
+    color: var(--hp-text);
+}
+
+/* Messages et notifications */
+.hp-form-message {
+    padding: 15px;
+    border-radius: var(--hp-radius);
+    margin: 20px 0;
+}
+
+.hp-form-message.success {
+    background: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.hp-form-message.error {
+    background: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.hp-form-message.info {
+    background: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+}
+
+/* Messages d'erreur */
+.hp-error,
+.hp-no-events,
+.hp-no-trainers,
+.hp-login-required {
+    padding: 15px;
+    background: var(--hp-lighter);
+    border: 1px solid var(--hp-border);
+    border-radius: var(--hp-radius);
+    color: var(--hp-text-light);
+    text-align: center;
+    margin: 20px 0;
+}
+
+.hp-error {
+    background: #f8d7da;
+    color: #721c24;
+    border-color: #f5c6cb;
+}
+
+/* Page de succès de soumission */
+.hp-submission-success {
+    text-align: center;
+    padding: 50px 20px;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.hp-submission-success h1 {
+    color: var(--hp-success);
+    font-size: 36px;
+    margin-bottom: 20px;
+}
+
+.hp-submission-success p {
+    font-size: 18px;
+    color: var(--hp-text);
+    margin-bottom: 20px;
+}
+
+.hp-submission-success a {
+    color: var(--hp-primary);
+    text-decoration: none;
+}
+
+.hp-submission-success a:hover {
+    text-decoration: underline;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+    .hp-calendar-public-filters {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .hp-calendar-public-filters select {
+        width: 100%;
+    }
+    
+    .hp-trainers-grid {
+        grid-template-columns: 1fr !important;
+    }
+    
+    .hp-trainer-card {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hp-trainer-avatar {
+        margin: 0 auto 15px;
+    }
+    
+    .hp-event-item {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .hp-event-date {
+        margin: 0 auto;
+    }
+    
+    .hp-form-row {
+        grid-template-columns: 1fr;
+    }
+    
+    .hp-availability-grid {
+        grid-template-columns: repeat(7, 1fr);
+        gap: 5px;
+    }
+    
+    .hp-availability-day {
+        font-size: 12px;
+    }
+    
+    .hp-day-number {
+        font-size: 16px;
+    }
+    
+    .hp-day-month {
+        font-size: 10px;
+    }
+}
+
+@media (max-width: 480px) {
+    .hp-availability-grid {
+        gap: 3px;
+    }
+    
+    .hp-day-status {
+        display: none;
+    }
+    
+    .hp-legend-items {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+}
+
+/* Impression */
+@media print {
+    .hp-calendar-public-filters,
+    .hp-form,
+    .hp-trainer-calendar-link,
+    .hp-submit-button,
+    .hp-button {
+        display: none !important;
+    }
+    
+    .hp-calendar-wrapper,
+    .hp-trainer-card,
+    .hp-event-item {
+        border: 1px solid #000 !important;
+        box-shadow: none !important;
+    }
+    
+    .hp-availability-day {
+        page-break-inside: avoid;
+    }
+}
+
+/* Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.hp-fade-in {
+    animation: fadeIn 0.3s ease-in;
+}
+
+/* FullCalendar personnalisations publiques */
+.hp-public-calendar .fc {
+    font-family: inherit;
+}
+
+.hp-public-calendar .fc-button-primary {
+    background-color: var(--hp-primary);
+    border-color: var(--hp-primary);
+}
+
+.hp-public-calendar .fc-button-primary:hover {
+    background-color: var(--hp-primary-dark);
+    border-color: var(--hp-primary-dark);
+}
+
+.hp-public-calendar .fc-button-primary:disabled {
+    background-color: #ccc;
+    border-color: #ccc;
+}
+
+.hp-public-calendar .fc-event {
+    cursor: pointer;
+    border: none;
+}
+
+.hp-public-calendar .fc-day-today {
+    background: var(--hp-primary-light) !important;
+}
+
+/* Accessibilité */
+.hp-sr-only {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    padding: 0;
+    margin: -1px;
+    overflow: hidden;
+    clip: rect(0,0,0,0);
+    white-space: nowrap;
+    border-width: 0;
+}
+
+/* Focus visible pour l'accessibilité */
+.hp-calendar-wrapper a:focus-visible,
+.hp-calendar-wrapper button:focus-visible,
+.hp-form input:focus-visible,
+.hp-form select:focus-visible,
+.hp-form textarea:focus-visible,
+.hp-form button:focus-visible {
+    outline: 3px solid var(--hp-primary);
+    outline-offset: 2px;
+}
